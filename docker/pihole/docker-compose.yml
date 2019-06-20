@@ -12,10 +12,10 @@ services:
       - "80:80/tcp"
       - "443:443/tcp"
     environment:
-      TZ: 'America/New York'
+      TZ: 'America/KentuckyLouisville'
     volumes:
-       - 'etc-pihole:/etc/pihole/'
-       - 'etc-dnsmasq.d:/etc/dnsmasq.d/'
+       - './etc-pihole:/etc/pihole/:Z'
+       - './etc-dnsmasq.d:/etc/dnsmasq.d/:Z'
     dns:
       - 127.0.0.1
       - 1.1.1.1
