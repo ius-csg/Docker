@@ -1,27 +1,27 @@
 version: "3"
 services:
-  mariadb:
+  mariadb: #database config
     image: mariadb
-    container_name: snipe_db
+    container_name: snipe-db
     restart: always
     volumes:
-      - /var/lib/mysql
+      - snipe-db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_USER=snipe
-      - MYSQL_PASSWORD=
-      - MYSQL_DATABASE=snipe
-  snipeit:
+      - MYSQL_ROOT_PASSWORD= #The root password
+      - MYSQL_USER=snipe # a user to be created
+      - MYSQL_PASSWORD= # that user's password
+      - MYSQL_DATABASE=snipe # The database created for that user
+  snipeit: #snipe-it config
     image: linuxserver/snipe-it:latest
     container_name: snipe-it
     restart: always
     depends_on:
       - mariadb
     volumes:
-      - /config
+      - snipe-data:/config
     environment:
-      - APP_URL=< your application URL IE 192.168.10.1:8080>
-      - MYSQL_PORT_3306_TCP_ADDR=mysql
+      - APP_URL= #< your application URL IE 192.168.10.1:8080>
+      - MYSQL_PORT_3306_TCP_ADDR=127.0.0.1
       - MYSQL_PORT_3306_TCP_PORT=3306
       - MYSQL_DATABASE=snipe
       - MYSQL_USER=snipe
@@ -31,3 +31,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+volumes: #make sure the volumes are created on docker-compose up
+ snipe-db:
+    external: false
+ snipe-data:
+    external: false
