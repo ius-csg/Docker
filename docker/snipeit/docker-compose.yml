@@ -36,3 +36,6 @@ volumes: #make sure the volumes are created on docker-compose up
     external: false
  snipe-data:
     external: false
+ network:
+     default:
+     driver: bridge
