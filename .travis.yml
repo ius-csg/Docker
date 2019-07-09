@@ -1,0 +1,4 @@
+language: minimal
+services:
+  - docker
+script: for file in docker/*/*.yml; do docker-compose -f $file config -q; done
