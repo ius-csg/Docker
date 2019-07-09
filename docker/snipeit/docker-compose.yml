@@ -38,4 +38,4 @@ volumes: #make sure the volumes are created on docker-compose up
     external: false
  network:
      default:
-     driver: bridge
+       driver: bridge
