@@ -1,0 +1,17 @@
+version: "3"
+services:
+  dokuwiki:
+    image: linuxserver/dokuwiki
+    container_name: dokuwiki
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Kentucky/Louisville
+    volumes:
+      - dw_config:/config
+    ports:
+      - 443:443 #optional
+    restart: unless-stopped
+volumes: #make sure the volumes are created on docker-compose up
+ dw_config:
+    external: false

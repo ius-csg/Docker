@@ -9,14 +9,19 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "67:67/udp"
-      - "80:80/tcp"
-      - "443:443/tcp"
+      - "8080:80/tcp"
+      - "8443:443/tcp"
     environment:
       TZ: 'America/Kentucky/Louisville'
     volumes:
-       - './etc-pihole:/etc/pihole/:Z'
-       - './etc-dnsmasq.d:/etc/dnsmasq.d/:Z'
+       - pihole:/etc/pihole/
+       - dnsmasq.d:/etc/dnsmasq.d/
     dns:
       - 127.0.0.1
       - 1.1.1.1
     restart: unless-stopped
+volumes: #make sure the volumes are created on docker-compose up
+ pihole:
+    external: false
+ dnsmasq.d:
+    external: false
